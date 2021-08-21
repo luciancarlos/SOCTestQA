@@ -1,51 +1,74 @@
 package com.luciancarlos.steps;
 
-import org.junit.Before;
-import org.openqa.selenium.WebDriver;
-
+import com.luciancarlos.pages.RedeCredenciadaPage;
+import com.luciancarlos.pages.SOCHomePage;
+import com.luciancarlos.pages.SOCNETPage;
+import com.luciancarlos.support.Screenshot;
 import com.luciancarlos.support.Web;
 
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
-import pages.SOCSitePage;
 
 public class BuscaCredenciadoTest {
-	private WebDriver driver;	
-	private SOCSitePage page;
-	private String busca;
-	private String filtro = "Estacionamento";	
-	
-	@Before
-	public void setUp() {
-		//driver = Web.createChrome();
-	}
-	
+	private SOCHomePage home = new SOCHomePage();
+	private SOCNETPage socnetPage = new SOCNETPage();
+	private RedeCredenciadaPage redeCredenciadaPage = new RedeCredenciadaPage();
+	private String busca = "Avenida Dona Ana Costa, 255 - Gonzaga, Santos - SP, Brasil";
+	// private String filtro = "Estacionamento";
+	private String localArquivo = "target/Screenshots/BuscaCredenciado/";
+
 	@Dado("que o usuario acesse o site da SOC")
 	public void queOUsuarioAcesseOSiteDaSOC() {
-		page = new SOCSitePage(driver);
-		page.queOUsuarioAcesseOSiteDaSOC();
+		home.abrirNavegador();
+		Screenshot.tirarPrint(Web.driver, localArquivo);
 	}
 
-	@Quando("clicar no botao Buscar credenciado")
-	public void clicarNoBotaoBuscarCredenciado() {
-		page.buscarCredenciado();
-	}	
+	@Dado("selecionar campo Funcionalidades")
+	public void selecionarCampoFuncionalidades() {
+		home.selecionarCampoFuncionalidades();
+		Screenshot.tirarPrint(Web.driver, localArquivo);
+	}
 
-	@Quando("preencher filtros de pesquisa")
-	public void preencherFiltrosDePesquisa() {
-		page.preencherFiltro(filtro );
-	}	
+	@Dado("clicar no campo RedeSOCNet")
+	public void clicarNoCampoRedeSOCNet() {
+		home.selecionarCampoRedeSOCNET();
+		Screenshot.tirarPrint(Web.driver, localArquivo);
+	}
 
-	@Quando("clicar no botão Saiba mais")
-	public void clicarNoBotãoSaibaMais() {
-		page.clicarSaibaMais(); //Provisorio
-	}	
+	@Quando("clicar no botao BuscarCredenciados")
+	public void clicarNoBotaoBuscarCredenciados() {
+		socnetPage.clicarBotaoBuscarCredenciados();
+		Screenshot.tirarPrint(Web.driver, localArquivo);
+	}
 
-	@Então("exibe o perfil do Credenciado")
-	public void exibeOPerfilDoCredenciado() {
-		//Assert aqui
-	}	
+	@Quando("selecionar Filtros")
+	public void selecionarFiltros() {
+		redeCredenciadaPage.selecionarFiltros();
+		Screenshot.tirarPrint(Web.driver, localArquivo);
+	}
+
+	@Quando("preencher o campo de Pesquisa do credenciado")
+	public void preencherOCampoDePesquisaDoCredenciado() {
+		redeCredenciadaPage.preencherPesquisa(busca);
+		Screenshot.tirarPrint(Web.driver, localArquivo);
+	}
+
+	@Quando("Pesquisar Credenciado")
+	public void pesquisarCredenciado() {
+		redeCredenciadaPage.clicarPesquisarCredenciado();
+		Screenshot.tirarPrint(Web.driver, localArquivo);
+	}
+
+	@Quando("acessar o perfil do credenciado")
+	public void acessarOPerfilDoCredenciado() {
+		redeCredenciadaPage.selecionarPerfilCredenciado();
+		Screenshot.tirarPrint(Web.driver, localArquivo);
+	}
+
+	@Então("sera exibido o perfil do credenciado com sucesso")
+	public void seraExibidoOPerfilDoCredenciadoComSucesso() {
+		Web.fecharNavegador();
+	}
 
 }
-

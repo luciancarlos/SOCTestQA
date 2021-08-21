@@ -8,10 +8,12 @@ import io.cucumber.junit.CucumberOptions.SnippetType;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		plugin = "pretty",
+		plugin = {"pretty","html:target/HTMLReports/report.html"},
 		features = "src/test/resources/",
-		//tags = "@credenciado",
-		tags = "@blog",
+		//tags = "@buscaCredenciado",
+		//tags = {"@buscaBlog"},
+		tags = {"@buscaCredenciado"},		
+		//tags = "@blog",		
 		glue = {"com.luciancarlos.steps"},
 		monochrome = true,
 		snippets = SnippetType.CAMELCASE,
