@@ -11,36 +11,37 @@ import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
 
 public class BuscaBlogTest {
-	private SOCBlogPage page = new SOCBlogPage();
+	
+	private SOCBlogPage blogPage = new SOCBlogPage();
 	private String busca = "covid";
-	private String localArquivo = "target/Screenshots/BuscaBlog/";
+	private String localArquivo = "target/Screenshots/";
 
 	@Dado("que o usuario acesse o blog da SOC")
 	public void queOUsuarioAcesseOBlogDaSOC() {
-		page.abrirNavegador();
+		blogPage.abrirNavegador();
 		Screenshot.tirarPrint(Web.driver, localArquivo);
 	}
 
 	@Dado("aceitar cookies")
 	public void aceitarCookies() {
-		page.aceitarCookies();
+		blogPage.aceitarCookies();
 		Screenshot.tirarPrint(Web.driver, localArquivo);
 	}
 
 	@Dado("preencher o campo de Pesquisa do blog")
 	public void preencherOCampoDePesquisaDoBlog() {
-		page.preencherPesquisa(busca);
+		blogPage.preencherPesquisa(busca);
 		Screenshot.tirarPrint(Web.driver, localArquivo);
 	}
 
 	@Quando("clicar no botão Pesquisar")
 	public void clicarNoBotãoPesquisar() {
-		page.clicarPesquisar();
+		blogPage.clicarPesquisar();
 	}
 
 	@Então("o resultado sera exibido")
 	public void oResultadoSeraExibido() {
-		assertTrue(page.obterResultado().contains(busca));
+		assertTrue(blogPage.obterResultado().contains(busca));
 		Screenshot.tirarPrint(Web.driver, localArquivo);
 		Web.fecharNavegador();
 	}

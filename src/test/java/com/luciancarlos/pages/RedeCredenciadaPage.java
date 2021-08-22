@@ -3,7 +3,7 @@ package com.luciancarlos.pages;
 import java.util.concurrent.TimeUnit;
 
 public class RedeCredenciadaPage extends BasePage {
-	String nomeCredenciado;
+	
 	public static final String FILTRO_ESTACIONAMENTO = "//div[@id='div-filtro-conveniencias']//section//span[contains(text(),'Estacionamento')]";
 	public static final String FILTRO_LAUDOS_PERICIAIS = "//div[@id='div-filtro-servicos']//span[contains(text(),'Laudos periciais')]";
 	public static final String INPUT_BUSCA_CREDENCIADO = "//*[@id='ipt-busca-credenciado-2']";
@@ -30,15 +30,9 @@ public class RedeCredenciadaPage extends BasePage {
 	}
 
 	public PerfilCredenciadoPage selecionarPerfilCredenciado() {
-		//new Actions(driver).doubleClick(driver.findElement(By.xpath("//div[@class='titulo-rede-credenciada']")));
 		moverMouseParaElemento(DADOS_CREDENCIADO);
 		clicarBotao(BOTAO_SAIBA_MAIS);
 		return new PerfilCredenciadoPage();
 	}
-
-//	public RedeCredenciadaPage clicarBotaoBuscarCredenciados() {
-//		clicarBotao(BOTAO_BUSCAR_CREDENCIADOS);
-//		return this;		
-//	}
 
 }

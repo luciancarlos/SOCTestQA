@@ -1,5 +1,8 @@
 package com.luciancarlos.steps;
 
+import static org.junit.Assert.assertEquals;
+
+import com.luciancarlos.pages.PerfilCredenciadoPage;
 import com.luciancarlos.pages.RedeCredenciadaPage;
 import com.luciancarlos.pages.SOCHomePage;
 import com.luciancarlos.pages.SOCNETPage;
@@ -11,28 +14,30 @@ import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
 
 public class BuscaCredenciadoTest {
-	private SOCHomePage home = new SOCHomePage();
+	
+	private SOCHomePage homePage = new SOCHomePage();
 	private SOCNETPage socnetPage = new SOCNETPage();
 	private RedeCredenciadaPage redeCredenciadaPage = new RedeCredenciadaPage();
+	private PerfilCredenciadoPage perfilCredenciadoPage = new PerfilCredenciadoPage();
+	
 	private String busca = "Avenida Dona Ana Costa, 255 - Gonzaga, Santos - SP, Brasil";
-	// private String filtro = "Estacionamento";
-	private String localArquivo = "target/Screenshots/BuscaCredenciado/";
+	private String localArquivo = "target/Screenshots/";
 
 	@Dado("que o usuario acesse o site da SOC")
 	public void queOUsuarioAcesseOSiteDaSOC() {
-		home.abrirNavegador();
+		homePage.abrirNavegador();
 		Screenshot.tirarPrint(Web.driver, localArquivo);
 	}
 
 	@Dado("selecionar campo Funcionalidades")
 	public void selecionarCampoFuncionalidades() {
-		home.selecionarCampoFuncionalidades();
+		homePage.selecionarCampoFuncionalidades();
 		Screenshot.tirarPrint(Web.driver, localArquivo);
 	}
 
 	@Dado("clicar no campo RedeSOCNet")
 	public void clicarNoCampoRedeSOCNet() {
-		home.selecionarCampoRedeSOCNET();
+		homePage.selecionarCampoRedeSOCNET();
 		Screenshot.tirarPrint(Web.driver, localArquivo);
 	}
 
@@ -68,6 +73,9 @@ public class BuscaCredenciadoTest {
 
 	@Então("sera exibido o perfil do credenciado com sucesso")
 	public void seraExibidoOPerfilDoCredenciadoComSucesso() {
+		String perfil = "https://socnet.soc.com.br/perfil";
+		assertEquals(perfil, perfilCredenciadoPage.exibirPerfil());
+		Screenshot.tirarPrint(Web.driver, localArquivo);
 		Web.fecharNavegador();
 	}
 

@@ -13,7 +13,8 @@ import org.openqa.selenium.WebDriver;
 public class Screenshot {
 	
 	public static void tirarPrint(WebDriver driver, String local) {
-		String nomeDoArquivo = local + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HH-mm-ss")) + ".png";
+		//String nomeDoArquivo = local + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HH-mm-ss")) + ".png";
+		String nomeDoArquivo = local + GeradorArquivo.dataHoraParaArquivo() + ".png";
 		File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		try {
 			FileUtils.copyFile(screenshot, new File(nomeDoArquivo));

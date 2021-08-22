@@ -11,13 +11,13 @@ public class Web {
 	public static WebDriver createChrome() {
 		System.setProperty("webdriver.chrome.driver", "target\\drivers\\chromedriver.exe");
 		driver = new ChromeDriver();		
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		//driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 				
 		return driver;
 	}
 	
 	public static void fecharNavegador() {
-		driver.quit();
+		driver.close();
 	}
 }
